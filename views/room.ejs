@@ -19,6 +19,9 @@
 </head>
 <body>
     <div class="main">
+        <div id="chat-burger">
+            <i class="fas fa-times"></i>
+        </div>
         <div class="main__left">
             <div class="main__left-room">
                 <div id="video-grid"></div>
@@ -43,7 +46,7 @@
                         <i class="fas fa-user-friends"></i>
                         <div>Participants</div>
                     </div>
-                    <div>
+                    <div id="controls_chat">
                         <i class="fas fa-comment-alt"></i>
                         <div>Chat</div>
                     </div>
@@ -61,16 +64,18 @@
                 Chat
             </div>
             <div class="main__right-messages">
-                <ul>
+                <ul id="chat">
 
                 </ul>
             </div>
             <div class="main__right-new">
-                asfdsdafsa
+                <div id="newMessage">
+
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
 </body>
 </html>

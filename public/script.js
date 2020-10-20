@@ -1,6 +1,9 @@
+import {createNewMessage, listenMessagesInput} from "./components/newMessage.js";
+import {addVideoStream, createVideo} from "./components/video.js";
+import {listenChatOpen} from "./components/chat.js";
+
 const socket = io('/')
-const videoGrid = document.getElementById('video-grid')
-const createVideo = () =>  document.createElement('video')
+
 const myVideo = createVideo()
 myVideo.muted = true
 
@@ -32,18 +35,15 @@ peer.on('open', id => {
                 addVideoStream(video, userStream)
             })
         })
+
+        listenMessagesInput(socket)
+        socket.on('new-message', message => {
+            createNewMessage(message)
+        })
+
+        listenChatOpen()
     })
 })
-
-
-
-const addVideoStream = (video, stream) => {
-    video.srcObject = stream
-    video.addEventListener('loadedmetadata', () => {
-        video.play()
-    })
-    videoGrid.append(video)
-}
 
 const connectNewUser = (userId, stream) => {
     const call = peer.call(userId, stream)
