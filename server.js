@@ -34,4 +34,9 @@ io.on('connection', socket => {
             io.to(roomId).emit('new-message', message)
         })
     })
+
+    socket.on('leave-room', (roomId, userId) => {
+        socket.leave(roomId)
+        socket.to(roomId).emit('user-disconnected', userId)
+    })
 })

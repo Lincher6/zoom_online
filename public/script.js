@@ -1,6 +1,7 @@
 import {createNewMessage, listenMessagesInput} from "./components/newMessage.js";
 import {addVideoStream, createVideo} from "./components/video.js";
 import {listenChatOpen} from "./components/chat.js";
+import {listenControls} from "./components/controls.js";
 
 const socket = io('/')
 
@@ -19,8 +20,16 @@ peer.on('open', id => {
         video: true,
         audio: true
     }).then( stream => {
+        window.onbeforeunload = () => {
+            socket.emit('leave-room', ROOM_ID, id, stream)
+        }
+
         myVideoStream = stream
-        addVideoStream(myVideo, myVideoStream)
+        addVideoStream(myVideo, myVideoStream, id)
+
+        socket.on('user-disconnected', (userId) => {
+            disconnectUser(userId)
+        })
 
         socket.on('user-connected', (userId) => {
             connectNewUser(userId, myVideoStream)
@@ -32,7 +41,7 @@ peer.on('open', id => {
             call.answer(myVideoStream)
             const video = createVideo()
             call.on('stream', userStream => {
-                addVideoStream(video, userStream)
+                addVideoStream(video, userStream, call.peer)
             })
         })
 
@@ -42,6 +51,7 @@ peer.on('open', id => {
         })
 
         listenChatOpen()
+        listenControls({ myVideo, socket, ROOM_ID, id, stream })
     })
 })
 
@@ -49,7 +59,16 @@ const connectNewUser = (userId, stream) => {
     const call = peer.call(userId, stream)
     const video = createVideo()
     call.on('stream', userStream => {
-        addVideoStream(video, userStream)
+        addVideoStream(video, userStream, userId)
     })
 }
+
+const disconnectUser = (userId) => {
+    const video = document.querySelector(`[data-id="${userId}"]`)
+    console.log(video)
+    video.remove()
+}
+
+
+
 
