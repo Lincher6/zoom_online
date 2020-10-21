@@ -53,6 +53,4 @@ io.on('connection', socket => {
         }
 
     })
-
-
 })

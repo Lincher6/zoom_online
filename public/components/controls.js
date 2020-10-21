@@ -53,13 +53,20 @@ export const listenControls = ({ myVideo, socket, ROOM_ID, id, stream }) => {
     securityButton.onclick = () => socket.emit('secure-room', ROOM_ID, !isRoomClosed )
 
     chatButton.onclick = () => openChat()
+
+    leaveButton.onclick = () => {
+        socket.emit('leave-room', ROOM_ID, id, stream)
+        window.location = '/'
+    }
 }
 
 export const closeRoom = (close) => {
     isRoomClosed = close
     if(close) {
         securityButton.style.color = colorActive
+        securityButton.innerHTML = `${securityIcon} Blocked`
     } else {
         securityButton.style.color = colorDefault
+        securityButton.innerHTML = `${securityIcon} Security`
     }
 }

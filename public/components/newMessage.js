@@ -1,5 +1,5 @@
 const sendSound = new Audio('assets/send-sound.mp3')
-sendSound.volume = .5
+sendSound.volume = .1
 
 const chat = document.getElementById('chat')
 const messagesWindow = document.querySelector('.main__right-messages')

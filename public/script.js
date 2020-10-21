@@ -2,11 +2,15 @@ import {createNewMessage, listenMessagesInput} from "./components/newMessage.js"
 import {addVideoStream, createVideo, putInfo} from "./components/video.js";
 import {listenChatOpen} from "./components/chat.js";
 import {listenControls, closeRoom} from "./components/controls.js";
+import {connectNewUser, disconnectUser} from "./components/connection.js";
+import {showLoader} from "./components/loader/loader.js";
 
 const socket = io('/')
 
 const myVideo = createVideo()
 myVideo.muted = true
+
+showLoader(true)
 
 let myVideoStream
 let peer = new Peer(undefined, {
@@ -20,6 +24,7 @@ peer.on('open', id => {
         video: true,
         audio: true
     }).then( stream => {
+        showLoader(false)
         window.onbeforeunload = () => {
             socket.emit('leave-room', ROOM_ID, id, stream)
         }
@@ -32,7 +37,7 @@ peer.on('open', id => {
         })
 
         socket.on('user-connected', (userId) => {
-            connectNewUser(userId, myVideoStream)
+            connectNewUser(userId, myVideoStream, peer)
         })
 
         socket.on('close-room', (close) => {
@@ -59,19 +64,6 @@ peer.on('open', id => {
         listenControls({ myVideo, socket, ROOM_ID, id, stream })
     })
 })
-
-const connectNewUser = (userId, stream) => {
-    const call = peer.call(userId, stream)
-    const video = createVideo()
-    call.on('stream', userStream => {
-        addVideoStream(video, userStream, userId)
-    })
-}
-
-const disconnectUser = (userId) => {
-    const video = document.querySelector(`[data-id="${userId}"]`)
-    video.remove()
-}
 
 
 

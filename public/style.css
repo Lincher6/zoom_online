@@ -29,11 +29,47 @@ ul {
 }
 
 #info {
+    display: flex;
+    align-items: center;
     position: absolute;
     left: 10px;
     top: 10px;
     font-size: 12px;
+}
+
+#info div {
     opacity: .5;
+}
+
+#info .button {
+    font-size: 18px;
+    transition: opacity .2s;
+    margin-left: 10px;
+}
+
+#info .button:hover {
+    transition: opacity .2s;
+    cursor: pointer;
+    opacity: 1;
+}
+
+#info__id {
+    margin-left: 5px;
+}
+
+#alert {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    text-align: center;
+    font-size: 32px;
+    opacity: 0;
+    display: none;
+}
+
+#alert.fade {
+    display: block;
+    animation: fade 2s;
 }
 
 .main__left {
@@ -180,25 +216,58 @@ ul {
     opacity: .6;
 }
 
+
+/* ANIMATIONS */
 @keyframes popUp {
     0% {transform: scale(1, 0)}
     50% {transform: scale(1, 1.1)}
     100% {transform: scale(1, 1)}
 }
 
+@keyframes fade {
+    0% {opacity: 1}
+    100% {opacity: 0}
+}
+
+
+/* SCROLL */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
     background: #666;
     border-radius: 5px;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
     background: #444;
     border-radius: 5px;
+}
+
+/* LOADER */
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
