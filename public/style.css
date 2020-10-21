@@ -28,6 +28,14 @@ ul {
     z-index: 100;
 }
 
+#info {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-size: 12px;
+    opacity: .5;
+}
+
 .main__left {
     display: flex;
     flex-direction: column;
@@ -80,12 +88,22 @@ ul {
 #video-grid {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 #video-grid video {
     height: 300px;
     width: 400px;
     margin: 10px;
+}
+
+#controls__leave {
+    color: firebrick;
+}
+
+#controls__leave div {
+    width: 100px;
+    text-align: center
 }
 
 .main__right {
@@ -113,6 +131,7 @@ ul {
 .main__right-messages {
     flex-grow: 1;
     overflow-y: auto;
+    scroll-behavior: smooth;
 }
 
 .chat__user-name {
@@ -124,6 +143,7 @@ ul {
 .chat__message-text {
     word-break: break-all;
 }
+
 
 #chat li {
     margin-bottom: 10px;

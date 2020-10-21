@@ -2,6 +2,7 @@ const sendSound = new Audio('assets/send-sound.mp3')
 sendSound.volume = .5
 
 const chat = document.getElementById('chat')
+const messagesWindow = document.querySelector('.main__right-messages')
 
 document.getElementById('newMessage').innerHTML = `
     <input type="text" id="newMessage__input" placeholder="Add new message..."/>
@@ -39,6 +40,10 @@ export const createNewMessage = (text, user = 'new user') => {
             <div class="chat__message-text">${text}</div>
         </li>
     `
-
     chat.append(message)
+    scrollBottom()
+}
+
+const scrollBottom = () => {
+    messagesWindow.scrollTop = messagesWindow.scrollHeight
 }

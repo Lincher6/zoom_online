@@ -1,7 +1,7 @@
 import {createNewMessage, listenMessagesInput} from "./components/newMessage.js";
-import {addVideoStream, createVideo} from "./components/video.js";
+import {addVideoStream, createVideo, putInfo} from "./components/video.js";
 import {listenChatOpen} from "./components/chat.js";
-import {listenControls} from "./components/controls.js";
+import {listenControls, closeRoom} from "./components/controls.js";
 
 const socket = io('/')
 
@@ -25,7 +25,7 @@ peer.on('open', id => {
         }
 
         myVideoStream = stream
-        addVideoStream(myVideo, myVideoStream, id)
+        addVideoStream(myVideo, myVideoStream)
 
         socket.on('user-disconnected', (userId) => {
             disconnectUser(userId)
@@ -33,6 +33,10 @@ peer.on('open', id => {
 
         socket.on('user-connected', (userId) => {
             connectNewUser(userId, myVideoStream)
+        })
+
+        socket.on('close-room', (close) => {
+            closeRoom(close)
         })
 
         socket.emit('join-room', ROOM_ID, id)
@@ -50,6 +54,7 @@ peer.on('open', id => {
             createNewMessage(message)
         })
 
+        putInfo(ROOM_ID, id)
         listenChatOpen()
         listenControls({ myVideo, socket, ROOM_ID, id, stream })
     })
@@ -65,7 +70,6 @@ const connectNewUser = (userId, stream) => {
 
 const disconnectUser = (userId) => {
     const video = document.querySelector(`[data-id="${userId}"]`)
-    console.log(video)
     video.remove()
 }
 
