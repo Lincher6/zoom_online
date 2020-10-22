@@ -1,4 +1,5 @@
 import {openChat} from "./chat.js";
+import {alert} from "../utils.js";
 
 const colorDefault = 'lightgrey'
 const colorOff = 'red'
@@ -47,6 +48,8 @@ const mediaToggle = (button, method, iconOn, iconOff, text, stream) => {
 
 export const listenControls = ({ myVideo, socket, ROOM_ID, id, stream }) => {
 
+    enableControls()
+
     mediaToggle(muteButton, 'getAudioTracks', unMuteIcon, muteIcon, 'Mute', stream)
     mediaToggle(videoButton, 'getVideoTracks', playIcon, stopIcon, 'Video', stream)
 
@@ -63,10 +66,27 @@ export const listenControls = ({ myVideo, socket, ROOM_ID, id, stream }) => {
 export const closeRoom = (close) => {
     isRoomClosed = close
     if(close) {
+        alert('Room blocked')
         securityButton.style.color = colorActive
         securityButton.innerHTML = `${securityIcon} Blocked`
     } else {
         securityButton.style.color = colorDefault
         securityButton.innerHTML = `${securityIcon} Security`
     }
+}
+
+export const disableControls = () => {
+    muteButton.classList.add('disabled')
+    videoButton.classList.add('disabled')
+    securityButton.classList.add('disabled')
+    participantsButton.classList.add('disabled')
+    chatButton.classList.add('disabled')
+}
+
+export const enableControls = () => {
+    muteButton.classList.remove('disabled')
+    videoButton.classList.remove('disabled')
+    securityButton.classList.remove('disabled')
+    participantsButton.classList.remove('disabled')
+    chatButton.classList.remove('disabled')
 }

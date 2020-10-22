@@ -50,6 +50,11 @@ io.on('connection', socket => {
                 socket.leave(roomId)
                 socket.to(roomId).emit('user-disconnected', userId)
             })
+
+            socket.on('disconnect', () => {
+                socket.leave(roomId)
+                socket.to(roomId).emit('user-disconnected', userId)
+            })
         }
 
     })

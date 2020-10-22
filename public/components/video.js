@@ -3,8 +3,7 @@ import {alert} from "../utils.js";
 const videoGrid = document.getElementById('video-grid')
 
 export const createVideo = () => {
-    const video = document.createElement('video')
-    return video
+    return document.createElement('video')
 }
 
 export const addVideoStream = (video, stream, id = 0) => {
@@ -13,6 +12,7 @@ export const addVideoStream = (video, stream, id = 0) => {
     video.addEventListener('loadedmetadata', () => {
         video.play()
     })
+
     videoGrid.append(video)
 
     if (id !== 0) {
@@ -47,9 +47,10 @@ export const putInfo = (roomId, userId) => {
         window.getSelection().addRange(range);
         document.execCommand("copy");
         window.getSelection().removeAllRanges();
-
         alert('Copied')
-
-
     }
+}
+
+export const clearVideoGrid = () => {
+    videoGrid.innerHTML = ''
 }
