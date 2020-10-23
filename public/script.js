@@ -18,7 +18,7 @@ let myVideoStream
 let peer = new Peer(undefined, {
     path: '/peerjs',
     host: '/',
-    port: 3030
+    port: 443
 })
 
 peer.on('call', call => {
