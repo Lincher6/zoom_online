@@ -18,7 +18,15 @@ let myVideoStream
 let peer = new Peer(undefined, {
     path: '/peerjs',
     host: '/',
-    port: 3030
+    port: 443
+})
+
+peer.on('call', call => {
+    call.answer(myVideoStream)
+    const video = createVideo()
+    call.on('stream', userStream => {
+        addVideoStream(video, userStream, call.peer)
+    })
 })
 
 showLoader(true)
@@ -54,14 +62,6 @@ const connectDevice = (myId) => {
 
         socket.on('new-message', message => {
             createNewMessage(message)
-        })
-
-        peer.on('call', call => {
-            call.answer(myVideoStream)
-            const video = createVideo()
-            call.on('stream', userStream => {
-                addVideoStream(video, userStream, call.peer)
-            })
         })
 
         listenMessagesInput(socket)
