@@ -23,7 +23,7 @@ app.get('/:room', (req, res) => {
     res.render(`room`, { roomId: req.params.room })
 })
 
-server.listen(process.env.PORT)
+server.listen(process.env.PORT || 3030)
 
 const rooms = {}
 io.on('connection', socket => {
