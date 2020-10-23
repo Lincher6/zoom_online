@@ -3,6 +3,11 @@ body {
     padding: 0;
     margin: 0;
     font-family: Roboto;
+
+    --dark1: #0e1621;
+    --dark2: #17212b;
+    --dark2-border: #27312b;
+    --dark3: #232e3c;
 }
 
 ul {
@@ -80,7 +85,7 @@ ul {
 }
 
 .main__left-room {
-    background: #1e1e1e;
+    background: var(--dark1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,10 +94,10 @@ ul {
 
 .main__left-controls {
     padding: 5px;
-    background: #2b2b2b;
+    background: var(--dark2);
     display: flex;
     justify-content: space-between;
-    border-top: 1px solid #3b3b3b;
+    border-top: 1px solid var(--dark2-border);
 }
 
 .main__left-controls-block {
@@ -156,6 +161,7 @@ ul {
     width: 400px;
     margin: 10px;
     border-radius: 5px;
+    border: 1px solid var(--dark3);
 }
 
 #controls__leave {
@@ -174,7 +180,7 @@ ul {
     display: flex;
     flex-direction: column;
     width: 300px;
-    background: #323232;
+    background: var(--dark3);
     border-left: 1px solid #424242;
     box-sizing: border-box;
 }
@@ -284,8 +290,8 @@ ul {
     height: 64px;
     margin: 8px;
     border-radius: 50%;
-    border: 6px solid #fff;
-    border-color: #fff transparent #fff transparent;
+    border: 6px solid lightskyblue;
+    border-color: lightskyblue transparent lightskyblue transparent;
     animation: lds-dual-ring 1.2s linear infinite;
 }
 @keyframes lds-dual-ring {
