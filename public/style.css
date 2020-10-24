@@ -6,7 +6,7 @@ body {
 
     --dark1: #0e1621;
     --dark2: #17212b;
-    --dark2-border: #27312b;
+    --dark2-border: #20324b;
     --dark3: #232e3c;
 }
 
@@ -43,7 +43,7 @@ ul {
 }
 
 #info div {
-    opacity: .5;
+    opacity: .7;
 }
 
 #info .button {
@@ -97,7 +97,7 @@ ul {
     background: var(--dark2);
     display: flex;
     justify-content: space-between;
-    border-top: 1px solid var(--dark2-border);
+    border-top: 1px solid var(--dark3);
 }
 
 .main__left-controls-block {
@@ -125,7 +125,7 @@ ul {
 .main__left-controls-block > div:hover {
     transition: background .3s;
     border-radius: 5px;
-    background: #393939;
+    background: var(--dark3);
     cursor: pointer;
 }
 .main__left-controls-block i {
@@ -162,6 +162,7 @@ ul {
     margin: 10px;
     border-radius: 5px;
     border: 1px solid var(--dark3);
+    object-fit: cover;
 }
 
 #controls__leave {
@@ -186,8 +187,7 @@ ul {
 }
 
 .main__right-closed {
-    transition: all .5s;
-    margin-right: -300px;
+
 }
 
 .main__right-title {
@@ -245,6 +245,35 @@ ul {
 #newMessage__send:hover {
     transition: opacity .3s;
     opacity: .6;
+}
+
+@media screen and (max-width: 1024px)  {
+    .main__right {
+        margin-right: -300px;
+    }
+
+    #video-grid video {
+        height: 200px;
+        width: 265px;
+    }
+
+    .main__left-controls-block > div {
+        transition: background .3s;
+        padding: 3px;
+        margin-right: 3px;
+        min-width: 50px;
+        border-radius: 3px;
+        border: none;
+        display: flex;
+        font-size: 14px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .main__left-controls-block i {
+        font-size: 20px;
+    }
 }
 
 

@@ -1,5 +1,6 @@
 import {openChat} from "./chat.js";
 import {alert} from "../utils.js";
+import {copyRoomId} from "./video.js";
 
 const colorDefault = 'lightgrey'
 const colorOff = 'red'
@@ -27,7 +28,7 @@ const createButton = (id, icon, text) => {
 const muteButton = createButton('controls__mute', unMuteIcon, 'Mute')
 const videoButton = createButton('controls__video', playIcon, 'Video')
 const securityButton = createButton('controls__security', securityIcon, 'Security')
-const participantsButton = createButton('controls__participants', participantsIcon, 'Participants')
+const shareButton = createButton('controls__participants', participantsIcon, 'Share')
 const chatButton = createButton('controls__chat', chatIcon, 'Chat')
 const leaveButton = createButton('controls__leave', leaveIcon, 'Leave Room')
 
@@ -55,6 +56,8 @@ export const listenControls = ({ myVideo, socket, ROOM_ID, id, stream }) => {
 
     securityButton.onclick = () => socket.emit('secure-room', ROOM_ID, !isRoomClosed )
 
+    shareButton.onclick = copyRoomId
+
     chatButton.onclick = () => openChat()
 
     leaveButton.onclick = () => {
@@ -79,7 +82,7 @@ export const disableControls = () => {
     muteButton.classList.add('disabled')
     videoButton.classList.add('disabled')
     securityButton.classList.add('disabled')
-    participantsButton.classList.add('disabled')
+    shareButton.classList.add('disabled')
     chatButton.classList.add('disabled')
 }
 
@@ -87,6 +90,6 @@ export const enableControls = () => {
     muteButton.classList.remove('disabled')
     videoButton.classList.remove('disabled')
     securityButton.classList.remove('disabled')
-    participantsButton.classList.remove('disabled')
+    shareButton.classList.remove('disabled')
     chatButton.classList.remove('disabled')
 }

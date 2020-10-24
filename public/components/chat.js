@@ -1,10 +1,15 @@
 const chatToggler = document.getElementById('chat-burger')
 const mainRight = document.querySelector('.main__right')
+const mainLeft = document.querySelector('.main__left')
 
 const closeIcon = `<i class="fas fa-times"></i>`
 const openIcon = `<i class="fas fa-bars"></i>`
 
 let closed = false
+if (window.innerWidth < 1024) {
+    closed = true
+}
+chatToggler.innerHTML = closed ?  openIcon : closeIcon
 
 export const toggleChat = () => {
     if (closed) {

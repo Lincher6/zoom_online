@@ -32,7 +32,7 @@ export const addVideoStream = (video, stream, id = 0) => {
 const info = document.getElementById('info')
 export const putInfo = (roomId, userId) => {
     info.innerHTML = `
-        <div style="color: lightskyblue">ROOM ID:</div>
+        <div style="color: lightskyblue; font-size: 14px">ROOM:</div>
         <div id="info__id">${roomId}</div>
         <div class="button" data-copy="roomId">
             <i class="far fa-copy"></i>
@@ -40,16 +40,19 @@ export const putInfo = (roomId, userId) => {
     `
     const copyButton = document.querySelector(`[data-copy="roomId"]`)
 
-    copyButton.onclick = () => {
-        const range = document.createRange();
-        range.selectNode(document.querySelector(`#info__id`));
-        window.getSelection().removeAllRanges();
-        window.getSelection().addRange(range);
-        document.execCommand("copy");
-        window.getSelection().removeAllRanges();
-        alert('Copied')
-    }
+    copyButton.onclick = copyRoomId
 }
+
+export const copyRoomId = () => {
+    const range = document.createRange();
+    range.selectNode(document.querySelector(`#info__id`));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges();
+    alert('Copied')
+}
+
 
 export const clearVideoGrid = () => {
     videoGrid.innerHTML = ''
