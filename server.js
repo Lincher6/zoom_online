@@ -16,7 +16,9 @@ app.use(express.static('public'))
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
-    res.redirect(`/${uuid()}`)
+    const randomRoom = uuid()
+    res.render(`home`, { roomId: randomRoom })
+    // res.redirect(`/${uuid()}`)
 })
 
 app.get('/:room', (req, res) => {
